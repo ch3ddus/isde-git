@@ -26,16 +26,16 @@ def load_data(filename):
     return X, y
 
 
-def split_data(x, y, fract_tr=0.5):
+def split_data(x, y, tr_fraction=0.5):
     """
     Divide X e y in training set e test set.
     """
     n_samples = x.shape[0]
-    n_tr = int(np.floor(n_samples * fract_tr))
+    n_tr = int(np.floor(n_samples * tr_fraction))
     
     Xtr = x[:n_tr]
     ytr = y[:n_tr]
     Xts = x[n_tr:]
     yts = y[n_tr:]
     
-    return Xtr, Xts, ytr, yts
+    return Xtr, ytr, Xts, yts
