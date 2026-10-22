@@ -35,7 +35,21 @@ class NMC(object):
         return self._class_labels
 
     def fit(self, xtr, ytr):
-        pass
+        """
+        Calcola il centroide medio per ciascuna classe e popola self._centroids.
+        """
+        self._classes = np.unique(y)
+        num_classes = len(self._classes)
+        num_features = x.shape[1]
+        
+        self._centroids = np.zeros((num_classes, num_features))
+        for i, c in enumerate(self._classes):
+            self._centroids[i] = np.mean(x[y == c], axis=0)
 
     def predict(self, xts):
-        pass
+        """
+        Predice la classe per ciascun campione in ingresso.
+        """
+        distances = np.linalg.norm(x[:, np.newaxis, :] - self._centroids[np.newaxis, :, :], axis=2)
+        nearest_indices = np.argmin(distances, axis=1)
+        return self._classes[nearest_indices]

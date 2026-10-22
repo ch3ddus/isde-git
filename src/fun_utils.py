@@ -26,9 +26,16 @@ def load_data(filename):
     return X, y
 
 
-def split_data(x, y, tr_fraction=0.5):
+def split_data(x, y, fract_tr=0.5):
     """
-    Split the data x, y into two random subsets
-
+    Divide X e y in training set e test set.
     """
-    pass
+    n_samples = x.shape[0]
+    n_tr = int(np.floor(n_samples * fract_tr))
+    
+    Xtr = x[:n_tr]
+    ytr = y[:n_tr]
+    Xts = x[n_tr:]
+    yts = y[n_tr:]
+    
+    return Xtr, Xts, ytr, yts
